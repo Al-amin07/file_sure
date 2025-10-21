@@ -1,43 +1,48 @@
-"use client";   
+"use client";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import loginSchema from "@/schemas/loginSchema";
+import { useLoginMutation } from "@/redux/api/auth/authApi";
+import { toast } from "sonner";
+import { jwtDecode } from "jwt-decode";
+import { useAppDispatch } from "@/redux/hooks";
+import { login } from "@/redux/features/user/userSlice";
+import { useRouter } from "next/navigation";
+
+type LoginFormData = z.infer<typeof loginSchema>;
 
 const LoginPage = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const [loginUser, { isLoading }] = useLoginMutation();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
+  const onSubmit = async (data: LoginFormData) => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await loginUser(data).unwrap();
+      console.log({ res });
+      if (res.success) {
+        const token = res?.data?.accessToken;
+        const decoded = jwtDecode(token);
 
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.message || "Login failed");
-
-      localStorage.setItem("token", data.token);
-      alert("Login successful!");
-      // redirect user, e.g., navigate("/dashboard")
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+        dispatch(login({ user: decoded, accessToken: token }));
+        router.push("/");
+        toast.success(res?.message || "Login Successfull");
+      } else {
+        throw Error(res?.message || "Login Failed");
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.data?.message);
     }
   };
 
@@ -48,11 +53,9 @@ const LoginPage = () => {
           Login to Your Account
         </h2>
 
-        {error && (
-          <div className="mb-4 text-red-500 text-center text-sm">{error}</div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Form */}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {/* Email */}
           <div>
             <label
               htmlFor="email"
@@ -63,15 +66,20 @@ const LoginPage = () => {
             <input
               id="email"
               type="email"
-              name="email"
               placeholder="example@email.com"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              {...register("email")}
+              className={`w-full rounded-lg border text-black px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              }`}
             />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
+          {/* Password */}
           <div>
             <label
               htmlFor="password"
@@ -82,21 +90,26 @@ const LoginPage = () => {
             <input
               id="password"
               type="password"
-              name="password"
               placeholder="••••••••"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              {...register("password")}
+              className={`w-full rounded-lg border text-black px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+                errors.password ? "border-red-500" : "border-gray-300"
+              }`}
             />
+            {errors.password && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.password.message}
+              </p>
+            )}
           </div>
 
+          {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading}
+            disabled={isLoading}
             className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition disabled:bg-gray-400"
           >
-            {loading ? "Logging in..." : "Login"}
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
 
