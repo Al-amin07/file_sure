@@ -10,11 +10,15 @@ const authApi = baseApi.injectEndpoints({
       }),
     }),
     register: builder.mutation({
-      query: (data) => ({
-        url: "user/register",
-        method: "POST",
-        body: data,
-      }),
+      query: ({ data, referralCode }) => {
+        console.log({ data, referralCode });
+        return {
+          url: `user/register${referralCode ? `?r=${referralCode}` : ""}`,
+          method: "POST",
+
+          body: data,
+        };
+      },
     }),
   }),
 });

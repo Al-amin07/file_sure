@@ -1,103 +1,56 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-// 🔹 Zod validation schema
-const signupSchema = z.object({
-  fullName: z
-    .string()
-    .min(2, "Full name must be at least 2 characters")
-    .max(50, "Full name too long"),
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-});
+import { useRegisterMutation } from "@/redux/api/auth/authApi";
+import { jwtDecode } from "jwt-decode";
+import { useAppDispatch } from "@/redux/hooks";
+import { toast } from "sonner";
+import { login } from "@/redux/features/user/userSlice";
+import { signupSchema } from "@/schemas/auth.schema";
 
 type SignupFormData = z.infer<typeof signupSchema>;
 
 export default function SignupPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [referralCode, setReferralCode] = useState("");
-
+  const referralCode = searchParams.get("r");
+  console.log({ referralCode });
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
   });
 
-  // Get referral code from URL
-  useEffect(() => {
-    const ref = searchParams.get("ref");
-    if (ref) {
-      setReferralCode(ref);
-    }
-  }, [searchParams]);
+  const [registerUser, { isLoading }] = useRegisterMutation();
+  const onSubmit = async (data: SignupFormData) => {
+    console.log({ data });
+    try {
+      const res = await registerUser({ data, referralCode }).unwrap();
+      console.log({ res });
+      if (res.success) {
+        const token = res?.data?.accessToken;
+        const decoded = jwtDecode(token);
 
-  // Handle form submit
-  const onSubmit = (data: SignupFormData) => {
-    const { fullName, email, password } = data;
-
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-
-    // check existing email
-    if (users.some((u: any) => u.email === email)) {
-      setError("email", { message: "Email already registered" });
-      return;
-    }
-
-    // Find referrer
-    let referrerId: string | null = null;
-    if (referralCode) {
-      const referrer = users.find((u: any) => u.referralCode === referralCode);
-      if (referrer) {
-        referrerId = referrer.id;
+        dispatch(login({ user: decoded, accessToken: token }));
+        router.push("/");
+        toast.success(res?.message || "Registration Successfull");
+      } else {
+        throw Error(res?.message || "Registration Failed");
       }
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.data?.message);
     }
-
-    // Create new user
-    const newUser = {
-      id: crypto.randomUUID(),
-      fullName,
-      email,
-      password,
-      credits: 0,
-      referralCode: `REF${Math.random()
-        .toString(36)
-        .substring(2, 7)
-        .toUpperCase()}`,
-      referredBy: referrerId,
-      createdAt: new Date().toISOString(),
-    };
-
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-
-    // Record referral
-    if (referrerId) {
-      const referrals = JSON.parse(localStorage.getItem("referrals") || "[]");
-      referrals.push({
-        id: crypto.randomUUID(),
-        referrerId,
-        referredUserId: newUser.id,
-        referredEmail: email,
-        createdAt: new Date().toISOString(),
-      });
-      localStorage.setItem("referrals", JSON.stringify(referrals));
-    }
-
-    localStorage.setItem("currentUser", JSON.stringify(newUser));
-    router.push("/");
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className=" flex min-h-[calc(100vh-80px)] items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
@@ -119,17 +72,17 @@ export default function SignupPage() {
               </label>
               <input
                 type="text"
-                {...register("fullName")}
+                {...register("name")}
                 className={`w-full px-4 py-2 border text-black rounded-lg focus:outline-none ${
-                  errors.fullName
+                  errors.name
                     ? "border-red-500 focus:ring-red-500"
                     : "border-gray-300 focus:ring-indigo-500"
                 }`}
                 placeholder="John Doe"
               />
-              {errors.fullName && (
+              {errors.name && (
                 <p className="text-red-600 text-sm mt-1">
-                  {errors.fullName.message}
+                  {errors.name.message}
                 </p>
               )}
             </div>
@@ -189,9 +142,10 @@ export default function SignupPage() {
 
             <button
               type="submit"
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+              disabled={isLoading}
+              className="w-full disabled:opacity-70 disabled:cursor-not-allowed bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
             >
-              Create Account
+              {isLoading ? "Creating..." : "Create Account"}
             </button>
           </form>
 
@@ -199,7 +153,7 @@ export default function SignupPage() {
             <p className="text-gray-600 text-sm">
               Already have an account?{" "}
               <a
-                href="/"
+                href="/login"
                 className="text-indigo-600 hover:text-indigo-700 font-semibold"
               >
                 Sign In

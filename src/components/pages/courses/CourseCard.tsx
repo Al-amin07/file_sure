@@ -1,18 +1,6 @@
-"use client";
-
-interface CourseCardProps {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  level: "Beginner" | "Intermediate" | "Advanced";
-  price: number;
-  rating: number;
-  students: number;
-  image: string;
-  instructor: string;
-  duration: string;
-}
+import { ICourse } from "@/types/course.type";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function CourseCard({
   id,
@@ -26,7 +14,7 @@ export default function CourseCard({
   image,
   instructor,
   duration,
-}: CourseCardProps) {
+}: ICourse) {
   const getLevelColor = (level: string) => {
     switch (level) {
       case "Beginner":
@@ -42,11 +30,12 @@ export default function CourseCard({
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      {/* Course Image */}
-      <div className="relative h-40 bg-gray-200 overflow-hidden">
-        <img
-          src={image || "/placeholder.svg"}
+      <div className="relative h-56 bg-gray-200 overflow-hidden">
+        <Image
+          src={(image as string) || "/placeholder.svg"}
           alt={title}
+          height={400}
+          width={600}
           className="w-full h-full object-cover"
         />
         <div className="absolute top-3 right-3">
@@ -88,9 +77,12 @@ export default function CourseCard({
         {/* Price and Button */}
         <div className="flex items-center justify-between pt-4 border-t border-gray-200">
           <span className="text-2xl font-bold text-indigo-600">${price}</span>
-          <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium">
+          <Link
+            href={`/checkout/${id}`}
+            className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium"
+          >
             Enroll
-          </button>
+          </Link>
         </div>
       </div>
     </div>

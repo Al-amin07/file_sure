@@ -1,25 +1,13 @@
 "use client";
 
 import { useState, useMemo } from "react";
-// import Navigation from "@/components/navigation";
-// import FilterSidebar from "@/components/filter-sidebar";
-// import CourseCard from "@/components/course-card";
+
 import { courses } from "@/lib/courseData";
 import { ICourse } from "@/types/course.type";
 import FilterSidebar from "./FIlterSidebar";
 import CourseCard from "./CourseCard";
 
-interface CoursesPageProps {
-  user: any;
-  setUser: (user: any) => void;
-  onNavigate: (page: string) => void;
-}
-
-export default function CoursesPage({
-  user,
-  setUser,
-  onNavigate,
-}: CoursesPageProps) {
+export default function CoursesPage({}) {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedLevel, setSelectedLevel] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
@@ -73,9 +61,7 @@ export default function CoursesPage({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* <Navigation user={user} setUser={setUser} onNavigate={onNavigate} /> */}
-
+    <div className="min-h-screen ">
       <main className="max-w-7xl mx-auto px-4 py-12">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">All Courses</h1>
@@ -101,7 +87,7 @@ export default function CoursesPage({
 
           <div className="flex-1">
             {filteredCourses.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {filteredCourses.map((course: ICourse) => (
                   <CourseCard key={course.id} {...course} />
                 ))}

@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface ICourse {
   id: number;
   title: string;
@@ -7,7 +9,7 @@ export interface ICourse {
   price: number;
   rating: number;
   students: number;
-  image: string;
+  image: string | StaticImageData;
   instructor: string;
   duration: string;
 }

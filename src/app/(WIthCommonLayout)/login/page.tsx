@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import loginSchema from "@/schemas/loginSchema";
+// import loginSchema from "@/schemas/loginSchema";
 import { useLoginMutation } from "@/redux/api/auth/authApi";
 import { toast } from "sonner";
 import { jwtDecode } from "jwt-decode";
 import { useAppDispatch } from "@/redux/hooks";
 import { login } from "@/redux/features/user/userSlice";
 import { useRouter } from "next/navigation";
+import { loginSchema } from "@/schemas/auth.schema";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -35,7 +36,7 @@ const LoginPage = () => {
         const decoded = jwtDecode(token);
 
         dispatch(login({ user: decoded, accessToken: token }));
-        router.push("/");
+        router.push("/dashboard");
         toast.success(res?.message || "Login Successfull");
       } else {
         throw Error(res?.message || "Login Failed");
@@ -47,7 +48,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
+    <div className="flex min-h-[calc(100vh-80px)]  items-center justify-center ">
       <div className="w-full max-w-md rounded-2xl bg-white shadow-md p-8">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
           Login to Your Account

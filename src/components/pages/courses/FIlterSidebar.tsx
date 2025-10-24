@@ -1,4 +1,3 @@
-import React from "react";
 
 interface FilterSidebarProps {
   categories: string[];
@@ -28,7 +27,7 @@ export default function FilterSidebar({
   onReset,
 }: FilterSidebarProps) {
   return (
-    <aside className="w-full md:w-64 bg-white rounded-lg shadow-md p-6">
+    <aside className="w-full  md:w-64 max-h-[550px] sticky top-24 bg-white rounded-lg shadow-xl p-6">
       <h2 className="text-xl font-bold mb-4 text-gray-800">Filters</h2>
 
       <div className="space-y-6">
