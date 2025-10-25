@@ -10,7 +10,7 @@ export default function HomeLayout({
   return (
     <div>
       <Navbar />
-      <main className="pt-28  min-h-[550px]">{children}</main>
+      <main className="pt-20 md:pt-28  min-h-[550px]">{children}</main>
       <Footer />
     </div>
   );

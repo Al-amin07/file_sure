@@ -17,10 +17,10 @@ const About = () => {
       {/* Hero: Mission Statement */}
       <section className="bg-indigo-700 pt-20 pb-16 sm:pt-24 sm:pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
             Our Mission: Empowering the Future of Learning
           </h1>
-          <p className="mt-6 max-w-3xl mx-auto text-xl text-indigo-200">
+          <p className="mt-6 max-w-3xl mx-auto text-lg lg:text-xl text-indigo-200">
             LearnPro was founded on the belief that high-quality, actionable
             education should be accessible to everyone, everywhere. We connect
             you with top industry experts and project-based courses designed to
@@ -28,7 +28,7 @@ const About = () => {
           </p>
           <div className="mt-8 flex justify-center text-white">
             <BookOpen className="w-8 h-8 mr-2" />
-            <span className="text-2xl font-semibold">
+            <span className="text-base lg:text-2xl font-semibold">
               Learn. Apply. Succeed.
             </span>
           </div>
@@ -37,9 +37,9 @@ const About = () => {
 
       {/* Values Section */}
       <section className="py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">
               Our Core Principles
             </h2>
             <p className="mt-4 text-xl text-gray-600">
@@ -48,7 +48,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             <ValuePillar
               icon={<CheckCircle className="w-6 h-6" />}
               title="Quality First"
@@ -81,7 +81,7 @@ const About = () => {
       <section className="bg-white py-16 sm:py-24 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">
               Meet Our Founders & Lead Instructors
             </h2>
             <p className="mt-4 text-xl text-gray-600">
@@ -117,7 +117,7 @@ const About = () => {
       {/* Final CTA */}
       <section className="bg-gray-800 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-extrabold text-white">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white">
             Ready to Start Your Journey?
           </h2>
           <p className="mt-4 text-xl text-gray-300">

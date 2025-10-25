@@ -13,7 +13,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="relative h-[600px] rounded-md md:h-[500px] w-full text-white">
+    <header className="relative h-[400px] rounded-md md:h-[500px] w-full text-white">
       {/* Background Image */}
       <Image
         src={bg}
@@ -27,7 +27,7 @@ export default function Header() {
 
       <div className="relative z-10 container mx-auto px-6 flex flex-col justify-center h-full text-center">
         {/* Heading */}
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 via-pink-500 to-yellow-500 animate-gradient">
+        <h1 className="text-3xl  md:text-4xl lg:text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 via-pink-500 to-yellow-500 animate-gradient">
           Find Your Next Course
         </h1>
 
@@ -37,7 +37,7 @@ export default function Header() {
         </p>
 
         {/* Search */}
-        <div className="flex flex-col md:flex-row justify-center items-center mb-8 gap-4">
+        {/* <div className="flex flex-col md:flex-row justify-center items-center mb-8 gap-4">
           <input
             type="text"
             placeholder="Search courses..."
@@ -46,14 +46,14 @@ export default function Header() {
           <button className="bg-indigo-400 hover:bg-indigo-500 px-8 py-4 rounded-r-lg font-semibold text-gray-900 shadow-lg transition transform hover:scale-105">
             Search
           </button>
-        </div>
+        </div> */}
 
         {/* Categories */}
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4">
           {categories.map((cat) => (
             <span
               key={cat}
-              className="bg-white/20 hover:bg-white/40 px-5 py-2 rounded-full cursor-pointer transition transform hover:scale-110"
+              className="bg-white/20 hover:bg-white/40 px-3 md:px-5 py-2 rounded-full cursor-pointer transition transform hover:scale-110"
             >
               {cat}
             </span>

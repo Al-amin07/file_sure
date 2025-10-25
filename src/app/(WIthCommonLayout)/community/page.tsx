@@ -36,10 +36,10 @@ const Community = () => {
           <span className="text-sm font-semibold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
             Our Global Learning Network
           </span>
-          <h1 className="mt-4 text-5xl sm:text-6xl font-extrabold text-gray-900 tracking-tight leading-tight">
+          <h1 className="mt-4 text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight leading-tight">
             Connect, Collaborate, Conquer.
           </h1>
-          <p className="mt-6 max-w-3xl mx-auto text-xl text-gray-600">
+          <p className="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
             Learning is better together. Join the **LearnPro Community**—a space
             for students, mentors, and experts to share knowledge, find
             accountability partners, and celebrate successes.
@@ -59,7 +59,7 @@ const Community = () => {
       <section className="py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">
               What You Gain
             </h2>
             <p className="mt-4 text-xl text-gray-600">
@@ -91,10 +91,10 @@ const Community = () => {
       <section className="bg-white py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:text-left text-center">
-            <h2 className="text-4xl font-extrabold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">
               Where We Connect
             </h2>
-            <p className="mt-4 text-xl text-gray-600 max-w-4xl lg:mx-0 mx-auto">
+            <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-4xl lg:mx-0 mx-auto">
               We offer multiple ways to engage, ensuring you can participate in
               the format that works best for you.
             </p>
@@ -167,10 +167,10 @@ const Community = () => {
       {/* Call to Action Footer */}
       <section className="bg-indigo-700 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-extrabold text-white">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white">
             Ready to Level Up Your Learning?
           </h2>
-          <p className="mt-4 text-xl text-indigo-200">
+          <p className="mt-4 text-lg md:text-xl text-indigo-200">
             The community is waiting for you to jump in.
           </p>
           <a
