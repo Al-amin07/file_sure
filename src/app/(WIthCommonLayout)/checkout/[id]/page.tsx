@@ -12,10 +12,15 @@ import { selectUser } from "@/redux/features/user/userSlice";
 import { billingSchema } from "@/schemas/auth.schema";
 import { useOrderMutation } from "@/redux/api/order/orderApi";
 import { toast } from "sonner";
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
 
 type BillingForm = z.infer<typeof billingSchema>;
 
-export default function CheckoutPage({ params }: { params: { id: string } }) {
+export default function CheckoutPage({ params }: PageProps) {
   const id = params.id;
   console.log({ id });
   const user = useAppSelector(selectUser);
