@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import machine from "@/assets/machine.jpg";
+// import machine from "@/assets/machine.jpg";
 import { courses } from "@/lib/courseData";
 import { useAppSelector } from "@/redux/hooks";
 import { selectUser } from "@/redux/features/user/userSlice";
@@ -21,11 +21,8 @@ export default function CheckoutPage({ params }: { params: { id: string } }) {
   const user = useAppSelector(selectUser);
   const course = courses.find((el) => el.id === Number(id));
 
+  const [paymentMethod, setPaymentMethod] = useState("credit");
   if (!course) return <div>Course not found</div>;
-
-  const [paymentMethod, setPaymentMethod] = useState<
-    "credit" | "paypal" | "crypto"
-  >("credit");
 
   const {
     register,

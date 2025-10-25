@@ -6,11 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-interface NavigationProps {
-  user: any;
-  setUser: (user: any) => void;
-  onNavigate: (page: string) => void;
-}
+
 
 export default function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -41,6 +37,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-6">
           {navLinks?.map((el) => (
             <Link
+            key={el.label}
               className={`text-gray-700 hover:text-indigo-600 font-medium transition ${
                 pathname === el.path ? "text-indigo-600" : ""
               }`}

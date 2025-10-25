@@ -2,10 +2,10 @@ import React from "react";
 import {
   BookOpen,
   Target,
-  Zap,
+  
   TrendingUp,
   Users,
-  Heart,
+ 
   CheckCircle,
 } from "lucide-react";
 import TeamMember from "@/components/pages/about/TeamMember";
@@ -85,7 +85,7 @@ const About = () => {
               Meet Our Founders & Lead Instructors
             </h2>
             <p className="mt-4 text-xl text-gray-600">
-              We're a small, passionate team dedicated to your success.
+              We&apos;re a small, passionate team dedicated to your success.
             </p>
           </div>
 

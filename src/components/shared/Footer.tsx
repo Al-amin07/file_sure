@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-200 pt-16 px-6 md:px-0 pb-10">
@@ -19,29 +21,29 @@ export default function Footer() {
           <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
           <ul className="space-y-2">
             <li>
-              <a href="/" className="hover:text-white transition">
+              <Link href="/" className="hover:text-white transition">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/courses" className="hover:text-white transition">
+              <Link href="/courses" className="hover:text-white transition">
                 Courses
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/about" className="hover:text-white transition">
+              <Link href="/about" className="hover:text-white transition">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/contact" className="hover:text-white transition">
+              <Link href="/contact" className="hover:text-white transition">
                 Contact
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/faq" className="hover:text-white transition">
+              <Link href="/faq" className="hover:text-white transition">
                 FAQ
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -51,29 +53,29 @@ export default function Footer() {
           <h4 className="text-lg font-semibold mb-4">Popular Courses</h4>
           <ul className="space-y-2">
             <li>
-              <a href="/courses/web" className="hover:text-white transition">
+              <Link href="/courses/web" className="hover:text-white transition">
                 Web Development
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/courses/react" className="hover:text-white transition">
+              <Link href="/courses/react" className="hover:text-white transition">
                 React
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/courses/python" className="hover:text-white transition">
+              <Link href="/courses/python" className="hover:text-white transition">
                 Python
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/courses/ui" className="hover:text-white transition">
+              <Link href="/courses/ui" className="hover:text-white transition">
                 UI/UX Design
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/courses/ai" className="hover:text-white transition">
+              <Link href="/courses/ai" className="hover:text-white transition">
                 AI & ML
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
