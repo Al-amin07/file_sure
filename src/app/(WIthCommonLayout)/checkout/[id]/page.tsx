@@ -20,7 +20,11 @@ interface PageProps {
 
 type BillingForm = z.infer<typeof billingSchema>;
 
-export default function CheckoutPage({ params }: PageProps) {
+export default function CheckoutPage({
+  params,
+}: {
+  params: { [key: string]: string };
+}) {
   const id = params.id;
   console.log({ id });
   const user = useAppSelector(selectUser);
