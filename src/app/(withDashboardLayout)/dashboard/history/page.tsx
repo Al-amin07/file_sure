@@ -5,7 +5,7 @@ import { IOrder } from "@/types/order.type";
 import Image from "next/image";
 import React from "react";
 
-export default function page() {
+export default function HistoryPage() {
   const { data, isLoading } = useHistoryQuery(null);
   console.log({ data });
   const orders = data?.data?.order;
@@ -19,7 +19,9 @@ export default function page() {
   if (!orders || orders.length === 0)
     return (
       <div className="flex flex-col items-center py-12 text-gray-500">
-        <img
+        <Image
+          height={200}
+          width={200}
           src="https://cdn-icons-png.flaticon.com/512/4076/4076507.png"
           alt="Empty"
           className="w-32 h-32 mb-4 opacity-70"

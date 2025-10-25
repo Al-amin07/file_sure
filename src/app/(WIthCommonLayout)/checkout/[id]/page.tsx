@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
 import React, { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
@@ -19,11 +19,8 @@ export default function CheckoutPage({ params }: { params: { id: string } }) {
   const id = params.id;
   console.log({ id });
   const user = useAppSelector(selectUser);
-  const course = courses.find((el) => el.id === Number(id));
-
   const [paymentMethod, setPaymentMethod] = useState("credit");
-  if (!course) return <div>Course not found</div>;
-
+  const course = courses.find((el) => el.id === Number(id));
   const {
     register,
     handleSubmit,
@@ -40,6 +37,7 @@ export default function CheckoutPage({ params }: { params: { id: string } }) {
     },
   });
   const [order] = useOrderMutation();
+  if (!course) return <div>Course not found</div>;
 
   const onSubmit = async (data: BillingForm) => {
     console.log("Form Submitted:", data);

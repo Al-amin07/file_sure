@@ -23,9 +23,11 @@ export default function DashboardCoursePage() {
   if (!myCourses || myCourses.length === 0)
     return (
       <div className="flex flex-col items-center py-12 text-gray-500">
-        <img
+        <Image
           src="https://cdn-icons-png.flaticon.com/512/4076/4076507.png"
           alt="Empty"
+          height={200}
+          width={200}
           className="w-32 h-32 mb-4 opacity-70"
         />
         <p className="text-lg font-medium">No purchased courses yet</p>

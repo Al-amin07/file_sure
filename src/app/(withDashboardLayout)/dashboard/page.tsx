@@ -3,7 +3,7 @@ import ReferralLink from "@/components/pages/dashboard/ReferralLink";
 import DashboardSkeleton from "@/components/pages/dashboard/SkeletonLoader";
 import { useHistoryQuery } from "@/redux/api/order/orderApi";
 
-export default function page() {
+export default function Dashboard() {
   const { data, isLoading } = useHistoryQuery(null);
   console.log(data);
   const user = data?.data?.user;

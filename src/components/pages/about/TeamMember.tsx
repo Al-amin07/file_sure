@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface IProps {
   name: string;
   role: string;
@@ -5,7 +7,9 @@ interface IProps {
 }
 const TeamMember = ({ name, role, imageUrl }: IProps) => (
   <div className="text-center">
-    <img
+    <Image
+      height={200}
+      width={200}
       className="mx-auto h-32 w-32 rounded-full object-cover shadow-md border-4 border-white transition-transform duration-300 hover:scale-[1.02]"
       src={imageUrl}
       alt={`Profile of ${name}`}
