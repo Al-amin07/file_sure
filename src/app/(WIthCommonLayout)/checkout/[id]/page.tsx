@@ -4,8 +4,9 @@ interface CheckoutPageProps {
     id: string;
   };
 }
+
 export default async function CheckoutPage({ params }: CheckoutPageProps) {
-  const id = params?.id;
+  const { id } = params;
   return (
     <div>
       <CheckoutForm id={id} />
