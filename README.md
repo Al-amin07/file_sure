@@ -38,9 +38,12 @@ npm run build
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-🔗 API Endpoint Overview
-Method	Endpoint	Description
-POST	/api/auth/register	Register a new user
-POST	/api/auth/login	Authenticate user and return JWT
-GET	/api/courses	Get all available courses
-GET	/api/courses/:id	Get course details by ID
+## 🔗 API Endpoint Overview
+
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST   | /api/auth/register   | Register a new user |
+| POST   | /api/auth/login      | Authenticate user and return JWT |
+| POST   | /api/order           | Make a order |
+| GET    | /api/order/history   | Get history |
+
