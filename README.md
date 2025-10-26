@@ -1,4 +1,4 @@
-# Rate My Bite
+# CreditHub
 
 https://file-sure.vercel.app/
 
