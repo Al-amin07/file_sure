@@ -36,7 +36,7 @@ export default function DashboardCoursePage() {
     );
 
   return (
-    <div className="overflow-x-auto mt-8 shadow-lg rounded-xl">
+    <div className="overflow-x-auto  shadow-lg rounded-xl">
       <h1 className="text-3xl font-bold text-gray-800 mb-6 ">My Course</h1>
       <table className="min-w-full border border-gray-200 bg-white rounded-lg overflow-hidden">
         <thead className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">

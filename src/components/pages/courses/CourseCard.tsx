@@ -1,6 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+import { selectUser } from "@/redux/features/user/userSlice";
+import { useAppSelector } from "@/redux/hooks";
 import { ICourse } from "@/types/course.type";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function CourseCard({
   id,
@@ -15,6 +20,8 @@ export default function CourseCard({
   instructor,
   duration,
 }: ICourse) {
+  const router = useRouter();
+  const user = useAppSelector(selectUser);
   const getLevelColor = (level: string) => {
     switch (level) {
       case "Beginner":
@@ -26,6 +33,15 @@ export default function CourseCard({
       default:
         return "bg-gray-100 text-gray-800";
     }
+  };
+
+  const handleCheckout = (id: number) => {
+    if (!user?.email) {
+      toast.error("Please login first");
+      router.push("/login");
+      return;
+    }
+    router.push(`/checkout/${id}`);
   };
 
   return (
@@ -77,12 +93,12 @@ export default function CourseCard({
         {/* Price and Button */}
         <div className="flex items-center justify-between pt-4 border-t border-gray-200">
           <span className="text-2xl font-bold text-indigo-600">${price}</span>
-          <Link
-            href={`/checkout/${id}`}
+          <button
+            onClick={() => handleCheckout(id)}
             className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium"
           >
             Enroll
-          </Link>
+          </button>
         </div>
       </div>
     </div>
