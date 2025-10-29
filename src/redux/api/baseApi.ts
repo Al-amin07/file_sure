@@ -5,8 +5,8 @@ import { RootState } from "../store";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_URL,
-    // baseUrl: "https://file-sure-server.vercel.app/api",
+    // baseUrl: process.env.NEXT_PUBLIC_API_URL,
+    baseUrl: "https://file-sure-server.vercel.app/api",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).user.accessToken || "";
       console.log({ token });
